@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "l3232a3GLPkI/u9xpfedtXlOOMpoSAQvwiIz2GzvaGjQQ9X6eQyaleZGNWPrrSB3nwoJkvSgACf4ExPQLEruuw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\adria\\Desktop\\TAiO\\TAiO\\TAiO.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\adria\\.nuget\\packages\\accord\\3.8.0\\accord.3.8.0.nupkg.sha512",
+    "C:\\Users\\adria\\.nuget\\packages\\accord.math\\3.8.0\\accord.math.3.8.0.nupkg.sha512",
+    "C:\\Users\\adria\\.nuget\\packages\\accord.statistics\\3.8.0\\accord.statistics.3.8.0.nupkg.sha512",
+    "C:\\Users\\adria\\.nuget\\packages\\hungarianalgorithm\\2.2.10\\hungarianalgorithm.2.2.10.nupkg.sha512",
+    "C:\\Users\\adria\\.nuget\\packages\\mathnet.numerics\\5.0.0\\mathnet.numerics.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
