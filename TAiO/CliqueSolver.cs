@@ -8,8 +8,9 @@ namespace TAiO
 {
     public static class CliqueSolver
     {
-        public static int[] AproxClique(DirectedGraph graph)
+        public static int[] AproxClique(DirectedGraph G)
         {
+            DirectedGraph graph = new DirectedGraph(G);
             int[] result = new int[graph.Vertices];
             int[] degrees;
             while (true)
@@ -49,8 +50,9 @@ namespace TAiO
                     .ToArray();
         }
 
-        public static int[] BiggestClique(DirectedGraph graph)
+        public static int[] BiggestClique(DirectedGraph G)
         {
+            DirectedGraph graph = new DirectedGraph(G);
             int[]? result;
             if (graph == null) return new int[1];
             if (graph.Vertices == 1) return new int[] { 1 };

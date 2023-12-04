@@ -20,7 +20,32 @@ namespace TAiO
                 adjacencyMatrix[i] = new int[vertices];
             }
         }
+        public DirectedGraph(DirectedGraph originalGraph)
+        {
+            this.Vertices = originalGraph.Vertices;
+            this.adjacencyMatrix = new int[Vertices][];
 
+            // Copy the adjacency matrix
+            for (int i = 0; i < Vertices; i++)
+            {
+                this.adjacencyMatrix[i] = new int[Vertices];
+                for (int j = 0; j < Vertices; j++)
+                {
+                    this.adjacencyMatrix[i][j] = originalGraph.adjacencyMatrix[i][j];
+                }
+            }
+        }
+        public void Cull()
+        {
+            for (int i = 1; i < Vertices; ++i)
+            {
+                for (int j = 0; j < i; ++j)
+                {
+                    adjacencyMatrix[i][j] = adjacencyMatrix[j][i] = (adjacencyMatrix[i][j] + adjacencyMatrix[j][i]) / 2;
+                }
+            }
+
+        }
         public void AddEdge(int from, int to)
         {
             adjacencyMatrix[from][to] = 1;
