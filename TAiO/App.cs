@@ -105,7 +105,7 @@ namespace TAiO
             Console.WriteLine("6. Wykonać testy");
             Console.WriteLine("7. Wyczyścić konsolę");
 
-            return ReadUserOption(0, 6);
+            return ReadUserOption(1, 7);
 
         }
         static int ReadUserOption(int min, int max)
