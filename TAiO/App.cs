@@ -97,15 +97,15 @@ namespace TAiO
         {
             int option;
             Console.WriteLine("Wybierz opcję, którą chcesz zrobić:");
-            Console.WriteLine("0. Wyczyścić konsolę");
-            Console.WriteLine("1. Znaleźć metrykę między dwoma grafami");
-            Console.WriteLine("2. Znaleźć maksymalny wspólny podgraf dla dwóch grafów");
-            Console.WriteLine("3. Znaleźć największą klikę grafu");
-            Console.WriteLine("4. Ustaw pierwszy graf (klika, podgraf, metryka)");
-            Console.WriteLine("5. Ustaw drugi graf (podgraf, metryka)");
-            Console.WriteLine("6. Testy");
+            Console.WriteLine("1. Ustawić pierwszy graf (klika, podgraf, metryka)");
+            Console.WriteLine("2. Ustawić drugi graf (podgraf, metryka)");
+            Console.WriteLine("3. Znaleźć metrykę między dwoma grafami");
+            Console.WriteLine("4. Znaleźć maksymalny wspólny podgraf dla dwóch grafów");
+            Console.WriteLine("5. Znaleźć największą klikę grafu");
+            Console.WriteLine("6. Wykonać testy");
+            Console.WriteLine("7. Wyczyścić konsolę");
 
-            return ReadUserOption(1, 7);
+            return ReadUserOption(0, 6);
 
         }
         static int ReadUserOption(int min, int max)
@@ -208,6 +208,20 @@ namespace TAiO
                 switch (GetOption())
                 {
                     case 1:
+                        try
+                        {
+                            GetGraph(out g1);
+                        }
+                        catch (Exception ex) { Console.WriteLine("Błąd:" + ex.Message); }
+                        break;
+                    case 2:
+                        try
+                        {
+                            GetGraph(out g2);
+                        }
+                        catch (Exception ex) { Console.WriteLine("Błąd:" + ex.Message); }
+                        break;
+                    case 3:
 
                         try
                         {
@@ -216,7 +230,7 @@ namespace TAiO
                         catch (Exception ex) { Console.WriteLine("Błąd:" + ex.Message); }
                         break;
 
-                    case 2:
+                    case 4:
 
                         try
                         {
@@ -225,32 +239,17 @@ namespace TAiO
                         catch (Exception ex) { Console.WriteLine("Błąd:" + ex.Message); }
                         break;
 
-                    case 3:
+                    case 5:
                         try
                         {
                             GetOptionClique(g1);
                         }
                         catch (Exception ex) { Console.WriteLine("Błąd:" + ex.Message); }
                         break;
-
-                    case 4:
-                        try
-                        {
-                            GetGraph(out g1);
-                        }
-                        catch (Exception ex) { Console.WriteLine("Błąd:" + ex.Message); }
-                        break;
-                    case 5:
-                        try
-                        {
-                            GetGraph(out g2);
-                        }
-                        catch (Exception ex) { Console.WriteLine("Błąd:" + ex.Message); }
-                        break;
                     case 6:
                         //run tests
                         break;
-                    case 0:
+                    case 7:
                         Console.Clear();
                         break;
 
