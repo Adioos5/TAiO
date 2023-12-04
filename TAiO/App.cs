@@ -7,20 +7,52 @@ using System.Reflection.Metadata;
 
 namespace TAiO
 {
+
     class Program
     {
+        private DirectedGraph graph1 = new DirectedGraph(0);
+        public DirectedGraph Graph1
+        {
+            get
+            {
+                return graph1;
+            }
+            set
+            {
+                graph1 = value;
+            }
+        }
+        private DirectedGraph graph2 = new DirectedGraph(0);
+        public DirectedGraph Graph2
+        {
+            get
+            {
+                if (graph2 == null)
+                {
+                    graph2 = new DirectedGraph(0);
+                }
+                return graph2;
+            }
+            set
+            {
+                graph2 = value;
+            }
+        }
+
+
         static string GetPath()
         {
             string? path;
-           
+
             while (true)
             {
                 Console.WriteLine("Podaj ścieżkę do pliku z grafem:");
+                Console.WriteLine("Bieżący katalog: " + Environment.CurrentDirectory);
                 path = Console.ReadLine();
 
-                if (File.Exists(path))
+                if (File.Exists(Environment.CurrentDirectory + '\\'+ path))
                 {
-                    return path;
+                    return Environment.CurrentDirectory + '\\' + path;
                 }
                 else
                 {
@@ -28,22 +60,20 @@ namespace TAiO
                 }
             }
         }
-
-        static int[,] GetGraph(StreamReader sr)
+        static void GetGraph(StreamReader sr, out DirectedGraph graph)
         {
             int size;
-            int[,] graph = null;
-
+            sr.ReadLine();
             size = int.Parse(sr.ReadLine());
             Console.WriteLine("Liczba wierzchołków: " + size);
 
-            graph = new int[size, size];
+            graph = new DirectedGraph(size);
             for (int i = 0; i < size; i++)
             {
                 string[] row = sr.ReadLine().Split(' ');
                 for (int j = 0; j < size; j++)
                 {
-                    graph[i, j] = int.Parse(row[j]);
+                    graph.adjacencyMatrix[i][j] = int.Parse(row[j]);
                 }
             }
 
@@ -52,26 +82,24 @@ namespace TAiO
             {
                 for (int j = 0; j < size; j++)
                 {
-                    Console.Write(graph[i, j] + " ");
+                    Console.Write(graph.adjacencyMatrix[i][j] + " ");
                 }
                 Console.WriteLine();
             }
-
-            return graph;
         }
-
-        static List<int[,]> GetGraphs(string path)
+        static DirectedGraph GetGraph(string path)
         {
             int nrOfGraphs;
-            List<int[,]> graphs = new List<int[,]>();
-
+            DirectedGraph directedGraph = new DirectedGraph(0); // shhh nikt tej linijki nie widzi
+            //List<int[,]> graphs = new List<int[,]>();
             try
             {
                 using (StreamReader sr = new StreamReader(path))
                 {
-                    nrOfGraphs = int.Parse(sr.ReadLine());
-                    Console.WriteLine("Liczba grafów: " + nrOfGraphs);
-
+                    //nrOfGraphs = int.Parse(sr.ReadLine());
+                    if (int.Parse(sr.ReadLine()) != 1) throw new Exception("inna ilość grafów niż 1");
+                    //Console.WriteLine("Liczba grafów: " + nrOfGraphs);
+                    /*
                     for (int i = 0; i < nrOfGraphs; i++)
                     {
                         var graph = GetGraph(sr);
@@ -82,8 +110,18 @@ namespace TAiO
                         Console.WriteLine(sr.ReadLine());
                         sr.ReadLine();
                     }
-
- 
+                    */
+                    int verticesNum = int.Parse(sr.ReadLine());
+                    directedGraph = new DirectedGraph(verticesNum);
+                    for (int i = 0; i < verticesNum; i++)
+                    {
+                        string s = sr.ReadLine();
+                        var items = s.Split(' ');
+                        for (int j = 0; j < verticesNum; j++)
+                        {
+                            directedGraph.adjacencyMatrix[i][j] = int.Parse(items[j]);
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -91,63 +129,176 @@ namespace TAiO
                 Console.WriteLine("Błąd podczas odczytu pliku: " + ex.Message);
             }
 
-            return graphs;
+            return directedGraph;
         }
         static int GetOption()
         {
             int option;
             Console.WriteLine("Wybierz opcję, którą chcesz zrobić:");
-            Console.WriteLine("0. Wyczyścić konsolę");
-            Console.WriteLine("1. Znaleźć metrykę między dwoma grafami");
-            Console.WriteLine("2. Znaleźć maksymalny wspólny podgraf dla dwóch grafów");
-            Console.WriteLine("3. Znaleźć największą klikę grafu");
+            Console.WriteLine("1. Wyczyścić konsolę");
+            Console.WriteLine("2. Znaleźć metrykę między dwoma grafami");
+            Console.WriteLine("3. Znaleźć maksymalny wspólny podgraf dla dwóch grafów");
+            Console.WriteLine("4. Znaleźć największą klikę grafu");
+            Console.WriteLine("5. Ustaw pierwszy graf (klika i podgraf)");
+            Console.WriteLine("6. Ustaw drugi graf (podgraf)");
+            Console.WriteLine("7. Testy");
 
+            return ReadUserOption(1, 7);
+
+        }
+        static int ReadUserOption(int min, int max)
+        {
+            int option;
             do
             {
                 string input = Console.ReadLine();
 
-                if (int.TryParse(input, out option) && option >= 0 && option <= 3)
+                if (int.TryParse(input, out option) && option >= min && option <= max)
                 {
                     return option;
                 }
                 else
                 {
-                    Console.WriteLine("Błąd: Wprowadź liczbę od 0 do 6.");
+                    Console.WriteLine($"Błąd: Wprowadź liczbę od {min} do {max}.");
                 }
 
             } while (true);
+        }
+        static private void GetOptionClique(DirectedGraph graph)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Wybierz opcję, którą chcesz zrobić:");
+            Console.WriteLine("1. Znajdź największą klikę");
+            Console.WriteLine("2. Znajdź aproksymację największej kliki");
+            int[] clique;
+            switch (ReadUserOption(1, 2))
+            {
+                case 1:
+                    clique = CliqueSolver.BiggestClique(graph);
+                    Console.WriteLine("Największa klika: " + (clique.Length == 0 ? "No clique found." : "[" + string.Join(", ", clique) + "]"));
+                    Console.WriteLine("Rozmiar kliki: " + clique.Length);
+                    break;
+
+                case 2:
+                    clique = CliqueSolver.AproxClique(graph);
+                    Console.WriteLine("Aproksymacja największej kliki: " + (clique.Length == 0 ? "No clique found." : "[" + string.Join(", ", clique) + "]"));
+                    Console.WriteLine("Rozmiar kliki: " + clique.Length);
+                    break;
+
+                default:
+
+                    break;
+            }
+            
 
         }
-
-        static void Main1()
+        static private void GetOptionSubgraph(DirectedGraph graph1, DirectedGraph graph2)
         {
-            List<int[,]> graphs1, graphs2;
+            Console.WriteLine();
+            Console.WriteLine("Wybierz opcję, którą chcesz zrobić:");
+            Console.WriteLine("1. Znajdź największy wspólny podgraf");
+            Console.WriteLine("2. Znajdź aproksymację największego wspólnego podgrafu");
+            int[] clique;
+            switch (ReadUserOption(1, 2))
+            {
+                case 1:
+                    MaximalCommonSubgraph.FindPrecisely(graph1, graph2);
+                    break;
 
+                case 2:
+                    MaximalCommonSubgraph.Approximate(graph1, graph2);
+                    break;
+
+                default:
+                    break;
+            }
+
+
+        }
+        static private void GetOptionMetric(DirectedGraph graph1, DirectedGraph graph2)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Wybierz opcję, którą chcesz zrobić:");
+            Console.WriteLine("1. Znajdź wartość metryki");
+            Console.WriteLine("2. Znajdź aproksymację wartości metryki");
+            switch (ReadUserOption(1, 2))
+            {
+                case 1:
+                    Console.WriteLine($"Dokładna wartość metryki to: {Metric.CalculatePrecisely(graph1, graph2)}");
+                    break;
+
+                case 2:
+                    Console.WriteLine($"Przybliżona wartość metryki to: {Metric.Approximate(graph1, graph2)}");
+                    break;
+
+                default:
+                    break;
+            }
+
+
+        }
+        static void Main()
+        {
+            DirectedGraph g1 = new DirectedGraph(0);
+            DirectedGraph g2 = new DirectedGraph(0);
             while (true)
             {
                 switch (GetOption())
                 {
                     case 1:
-                        
 
+                        try
+                        {
+                            GetOptionMetric(g1, g2);
+                        }
+                        catch (Exception ex) { Console.WriteLine("Błąd:" + ex.Message); }
                         break;
+
                     case 2:
-                        
-                        //MacCommonSubgraph.Find(graph1, graph2);
+
+                        try
+                        {
+                            GetOptionSubgraph(g1, g2);
+                        }
+                        catch (Exception ex) { Console.WriteLine("Błąd:" + ex.Message); }
                         break;
+
                     case 3:
-                        
+                        try
+                        {
+                            GetOptionClique(g1);
+                        }
+                        catch (Exception ex) { Console.WriteLine("Błąd:" + ex.Message); }
+                        break;
+
+                    case 4:
+                        using (StreamReader sr = new StreamReader(GetPath()))
+                            try
+                            {
+                                GetGraph(sr, out g1);
+                            }
+                            catch (Exception ex) { Console.WriteLine("Błąd:" + ex.Message); }
+                        break;
+
+                    case 5:
+                        using (StreamReader sr = new StreamReader(GetPath()))
+                            try
+                            {
+                                GetGraph(sr, out g2);
+                            }
+                            catch (Exception ex) { Console.WriteLine("Błąd:" + ex.Message); }
+                        break;
+                    case 6:
+                        //run tests
                         break;
                     case 0:
                         Console.Clear();
                         break;
+
                     default:
                         break;
                 }
-            } 
-            
-            return;
-
+            }
         }
     }
 }
