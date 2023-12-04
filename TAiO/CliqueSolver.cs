@@ -11,6 +11,7 @@ namespace TAiO
         public static int[] AproxClique(DirectedGraph G)
         {
             DirectedGraph graph = new DirectedGraph(G);
+            graph.Cull();
             int[] result = new int[graph.Vertices];
             int[] degrees;
             while (true)
@@ -53,6 +54,7 @@ namespace TAiO
         public static int[] BiggestClique(DirectedGraph G)
         {
             DirectedGraph graph = new DirectedGraph(G);
+            graph.Cull();
             int[]? result;
             if (graph == null) return new int[1];
             if (graph.Vertices == 1) return new int[] { 1 };
