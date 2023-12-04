@@ -76,7 +76,7 @@ namespace TAiO
             Console.WriteLine("[ MAKSYMALNA KLIKA ] ");
 
             int numVertices = 10;
-            Graph graph = new Graph(numVertices);
+            DirectedGraph graph = new DirectedGraph(numVertices);
 
             graph.AddEdge(0, 1);
             graph.AddEdge(0, 4);
@@ -98,7 +98,7 @@ namespace TAiO
             }
 
             Console.WriteLine("Adjacency Matrix of the graph:");
-            graph.PrintGraph();
+            graph.PrintAdjacencyMatrix();
 
             var bClique = CliqueSolver.BiggestClique(graph);
             Console.WriteLine("Największa klika:");

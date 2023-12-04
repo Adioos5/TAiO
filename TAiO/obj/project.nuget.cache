@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "l3232a3GLPkI/u9xpfedtXlOOMpoSAQvwiIz2GzvaGjQQ9X6eQyaleZGNWPrrSB3nwoJkvSgACf4ExPQLEruuw==",
+  "dgSpecHash": "90jjE4u2MWVNGNfTaiB4hY21FbIHt9tFNuZVsPI0WNKpO2PVay6GckAqc5hdt7Fd/PRnAgaOrF1BVQ8PdOLAig==",
   "success": true,
-  "projectFilePath": "C:\\Users\\adria\\Desktop\\TAiO\\TAiO\\TAiO.csproj",
+  "projectFilePath": "C:\\Users\\adria\\Desktop\\TAiO-projekt\\TAiO\\TAiO.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\adria\\.nuget\\packages\\accord\\3.8.0\\accord.3.8.0.nupkg.sha512",
     "C:\\Users\\adria\\.nuget\\packages\\accord.math\\3.8.0\\accord.math.3.8.0.nupkg.sha512",

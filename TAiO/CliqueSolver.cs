@@ -8,9 +8,9 @@ namespace TAiO
 {
     public static class CliqueSolver
     {
-        public static int[] AproxClique(Graph graph)
+        public static int[] AproxClique(DirectedGraph graph)
         {
-            int[] result = new int[graph.NumVertices];
+            int[] result = new int[graph.Vertices];
             int[] degrees;
             while (true)
             {
@@ -29,9 +29,9 @@ namespace TAiO
                 if (indexMax >= 0)
                 {
                     result[indexMax] = 1;
-                    for (int i = 0; i < graph.NumVertices; i++)
+                    for (int i = 0; i < graph.Vertices; i++)
                     {
-                        if (graph.AdjacencyMatrix[i, indexMax] == 0 && i != indexMax)
+                        if (graph.adjacencyMatrix[i][indexMax] == 0 && i != indexMax)
                         {
                             graph.deleteVer(i);
                         }
@@ -49,14 +49,14 @@ namespace TAiO
                     .ToArray();
         }
 
-        public static int[] BiggestClique(Graph graph)
+        public static int[] BiggestClique(DirectedGraph graph)
         {
             int[]? result;
             if (graph == null) return new int[1];
-            if (graph.NumVertices == 1) return new int[] { 1 };
+            if (graph.Vertices == 1) return new int[] { 1 };
 
             //can be better starting point
-            for (int i = graph.NumVertices; i > 0; i--)
+            for (int i = graph.Vertices; i > 0; i--)
             {
                 if ((result = LookForClique(graph, i)) != null)
                 {
@@ -66,7 +66,7 @@ namespace TAiO
             return new int[] { 1 };
 
         }
-        public static int[]? LookForClique(Graph graph, int size)
+        public static int[]? LookForClique(DirectedGraph graph, int size)
         {
             int[] vertices = graph.FindDegrees();
             vertices = vertices.Select((value, index) => new { value, index })
