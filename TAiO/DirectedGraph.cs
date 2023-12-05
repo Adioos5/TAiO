@@ -35,6 +35,22 @@ namespace TAiO
                 }
             }
         }
+        public DirectedGraph(int[,] matrix)
+        {
+            this.Vertices = matrix.GetLength(0);
+            this.adjacencyMatrix = new int[Vertices][];
+
+            // Copy the adjacency matrix
+            for (int i = 0; i < Vertices; i++)
+            {
+                this.adjacencyMatrix[i] = new int[Vertices];
+                for (int j = 0; j < Vertices; j++)
+                {
+                    this.adjacencyMatrix[i][j] = matrix[i,j];
+                }
+            }
+        }
+
         public void Cull()
         {
             for (int i = 1; i < Vertices; ++i)
@@ -53,6 +69,7 @@ namespace TAiO
 
         public void PrintAdjacencyMatrix()
         {
+            Console.WriteLine("Macierz sąsiedztwa:");
             for (int i = 0; i < Vertices; i++)
             {
                 for (int j = 0; j < Vertices; j++)
