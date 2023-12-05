@@ -63,14 +63,15 @@ namespace TAiO
         static int GetOption()
         {
             Console.WriteLine("Wybierz opcje, ktora chcesz zrobic:");
-            Console.WriteLine("1. Ustawic pierwszy graf (klika, podgraf, metryka).");
-            Console.WriteLine("2. Ustawic drugi graf (podgraf, metryka).");
-            Console.WriteLine("3. Znalezc metrykę miedzy dwoma grafami.");
-            Console.WriteLine("4. Znalezc maksymalny wspolny podgraf dla dwoch grafow.");
-            Console.WriteLine("5. Znalezc najwieksza klike grafu.");
-            Console.WriteLine("6. Wyczyscic konsole.");
+            Console.WriteLine("[1] Ustawic pierwszy graf (klika, podgraf, metryka).");
+            Console.WriteLine("[2] Ustawic drugi graf (podgraf, metryka).");
+            Console.WriteLine("[3] Znalezc metrykę miedzy dwoma grafami.");
+            Console.WriteLine("[4] Znalezc maksymalny wspolny podgraf dla dwoch grafow.");
+            Console.WriteLine("[5] Znalezc najwieksza klike grafu.");
+            Console.WriteLine("[6] Wyczyscic konsole.");
+            Console.WriteLine("[7] Zakoncz program.");
 
-            return ReadUserOption(1, 6);
+            return ReadUserOption(1, 7);
 
         }
         static int ReadUserOption(int min, int max)
@@ -95,22 +96,24 @@ namespace TAiO
         {
             Console.WriteLine();
             Console.WriteLine("Wybierz opcje, ktora chcesz zrobic:");
-            Console.WriteLine("1. Znajdz najwieksza klike.");
-            Console.WriteLine("2. Znajdz aproksymacje najwiekszej kliki.");
+            Console.WriteLine("[1] Znajdz najwieksza klike.");
+            Console.WriteLine("[2] Znajdz aproksymacje najwiekszej kliki.");
             int[] clique;
             switch (ReadUserOption(1, 2))
             {
                 case 1:
                     clique = CliqueSolver.BiggestClique(graph);
-                    Console.WriteLine("Najwieksza klika: " + (clique.Length == 0 ? "Klika nieznaleziona." : "[" + string.Join(", ", clique) + "]"));
-                    Console.WriteLine("Rozmiar kliki: " + clique.Length);
+                    Console.WriteLine();
+                    Console.WriteLine("[Najwieksza klika]: " + (clique.Length == 0 ? "Klika nieznaleziona." : "[" + string.Join(", ", clique) + "]"));
+                    Console.WriteLine("[Rozmiar kliki]: " + clique.Length);
                     Console.WriteLine();
                     break;
 
                 case 2:
                     clique = CliqueSolver.AproxClique(graph);
-                    Console.WriteLine("Aproksymacja najwiekszej kliki: " + (clique.Length == 0 ? "Klika nieznaleziona." : "[" + string.Join(", ", clique) + "]"));
-                    Console.WriteLine("Rozmiar kliki: " + clique.Length);
+                    Console.WriteLine();
+                    Console.WriteLine("[Aproksymacja najwiekszej kliki]: " + (clique.Length == 0 ? "Klika nieznaleziona." : "[" + string.Join(", ", clique) + "]"));
+                    Console.WriteLine("[Rozmiar kliki]: " + clique.Length);
                     Console.WriteLine();
                     break;
 
@@ -125,8 +128,8 @@ namespace TAiO
         {
             Console.WriteLine();
             Console.WriteLine("Wybierz opcje, ktora chcesz zrobic:");
-            Console.WriteLine("1. Znajdz maksymalny wspolny podgraf.");
-            Console.WriteLine("2. Znajdz aproksymacje maksymalnego wspolnego podgrafu.");
+            Console.WriteLine("[1] Znajdz maksymalny wspolny podgraf.");
+            Console.WriteLine("[2] Znajdz aproksymacje maksymalnego wspolnego podgrafu.");
             switch (ReadUserOption(1, 2))
             {
                 case 1:
@@ -153,17 +156,19 @@ namespace TAiO
         {
             Console.WriteLine();
             Console.WriteLine("Wybierz opcje, ktora chcesz zrobic:");
-            Console.WriteLine("1. Znajdz wartosc metryki.");
-            Console.WriteLine("2. Znajdz aproksymacje wartosci metryki.");
+            Console.WriteLine("[1] Znajdz dokladna wartosc metryki.");
+            Console.WriteLine("[2] Znajdz aproksymacje wartosci metryki.");
             switch (ReadUserOption(1, 2))
             {
                 case 1:
-                    Console.WriteLine($"Dokladna wartosc metryki to: {Metric.CalculatePrecisely(graph1, graph2)}");
+                    Console.WriteLine();
+                    Console.WriteLine($"[Dokladna wartosc metryki to]: {Metric.CalculatePrecisely(graph1, graph2)}");
                     Console.WriteLine();
                     break;
 
                 case 2:
-                    Console.WriteLine($"Przyblizona wartosc metryki to: {Metric.Approximate(graph1, graph2)}");
+                    Console.WriteLine();
+                    Console.WriteLine($"[Przyblizona wartosc metryki to]: {Metric.Approximate(graph1, graph2)}");
                     Console.WriteLine();
                     break;
 
@@ -177,8 +182,8 @@ namespace TAiO
         static int GetDecisionForGraphs()
         {
             Console.WriteLine("Wybierz opcje, ktora chcesz zrobic:");
-            Console.WriteLine("1. Wczytac domyslne dwa grafy.");
-            Console.WriteLine("2. Ustawic własne dwa grafy.");
+            Console.WriteLine("[1] Rozpoczac z domyslnymi dwoma grafami.");
+            Console.WriteLine("[2] Dodac własne dwa grafy.");
             return ReadUserOption(1, 2);
         }
         static void Main()
@@ -207,8 +212,13 @@ namespace TAiO
             switch (GetDecisionForGraphs())
             {
                 case 1:
+                    Console.WriteLine();
+                    Console.WriteLine("[Macierz sasiedztwa grafu nr 1]:");
                     g1.PrintAdjacencyMatrix();
+                    Console.WriteLine();
+                    Console.WriteLine("[Macierz sasiedztwa grafu nr 2]:");
                     g2.PrintAdjacencyMatrix();
+                    Console.WriteLine();
                     break;
 
                 case 2:
@@ -265,6 +275,9 @@ namespace TAiO
                         break;
                     case 6:
                         Console.Clear();
+                        break;
+                    case 7:
+                        Environment.Exit(0);
                         break;
 
                     default:

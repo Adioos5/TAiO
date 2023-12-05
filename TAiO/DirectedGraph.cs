@@ -69,7 +69,6 @@ namespace TAiO
 
         public void PrintAdjacencyMatrix()
         {
-            Console.WriteLine("Macierz sąsiedztwa:");
             for (int i = 0; i < Vertices; i++)
             {
                 for (int j = 0; j < Vertices; j++)
