@@ -91,7 +91,7 @@ namespace TAiO
         {
             Console.WriteLine();
             Console.WriteLine("Wybierz opcje, ktora chcesz zrobic:");
-            Console.WriteLine("1. Znajdz najwiekszą klike.");
+            Console.WriteLine("1. Znajdz najwieksza klike.");
             Console.WriteLine("2. Znajdz aproksymacje najwiekszej kliki.");
             int[] clique;
             switch (ReadUserOption(1, 2))
