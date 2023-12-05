@@ -19,6 +19,8 @@ namespace TAiO
                 Console.WriteLine("Podaj sciezke do pliku z grafem:");
                 Console.WriteLine("Biezacy katalog: " + Environment.CurrentDirectory);
                 path = Console.ReadLine();
+                if (path == null)
+                    path = "";
 
                 if (!path.StartsWith('C'))
                     path = Environment.CurrentDirectory + '\\' + path;
@@ -39,13 +41,16 @@ namespace TAiO
             using (StreamReader sr = new StreamReader(GetPath()))
             {
                 sr.ReadLine();
-                size = int.Parse(sr.ReadLine());
+                size = int.Parse(sr.ReadLine() ?? "0");
                 Console.WriteLine("Liczba wierzchołkow: " + size);
 
                 graph = new DirectedGraph(size);
                 for (int i = 0; i < size; i++)
                 {
-                    string[] row = sr.ReadLine().Split(' ');
+                    string? input = sr.ReadLine();
+                    if(input == null)
+                        input = "";
+                    string[] row = input.Split(' ');
                     for (int j = 0; j < size; j++)
                     {
                         graph.adjacencyMatrix[i][j] = int.Parse(row[j]);
@@ -57,7 +62,6 @@ namespace TAiO
         }
         static int GetOption()
         {
-            int option;
             Console.WriteLine("Wybierz opcje, ktora chcesz zrobic:");
             Console.WriteLine("1. Ustawic pierwszy graf (klika, podgraf, metryka).");
             Console.WriteLine("2. Ustawic drugi graf (podgraf, metryka).");
@@ -74,7 +78,7 @@ namespace TAiO
             int option;
             do
             {
-                string input = Console.ReadLine();
+                string? input = Console.ReadLine();
 
                 if (int.TryParse(input, out option) && option >= min && option <= max)
                 {
@@ -123,7 +127,6 @@ namespace TAiO
             Console.WriteLine("Wybierz opcje, ktora chcesz zrobic:");
             Console.WriteLine("1. Znajdz maksymalny wspolny podgraf.");
             Console.WriteLine("2. Znajdz aproksymacje maksymalnego wspolnego podgrafu.");
-            int[] clique;
             switch (ReadUserOption(1, 2))
             {
                 case 1:
