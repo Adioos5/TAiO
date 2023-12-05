@@ -264,19 +264,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\adria\\.nuget\\packages\\": {}
+    "C:\\Users\\Anita\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\adria\\Desktop\\TAiO-projekt\\TAiO\\TAiO.csproj",
+      "projectUniqueName": "C:\\Users\\Anita\\TAiO\\TAiO\\TAiO.csproj",
       "projectName": "TAiO",
-      "projectPath": "C:\\Users\\adria\\Desktop\\TAiO-projekt\\TAiO\\TAiO.csproj",
-      "packagesPath": "C:\\Users\\adria\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\adria\\Desktop\\TAiO-projekt\\TAiO\\obj\\",
+      "projectPath": "C:\\Users\\Anita\\TAiO\\TAiO\\TAiO.csproj",
+      "packagesPath": "C:\\Users\\Anita\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Anita\\TAiO\\TAiO\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\adria\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Anita\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -339,7 +339,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
