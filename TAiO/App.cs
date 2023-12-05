@@ -83,15 +83,7 @@ namespace TAiO
                 }
             }
 
-            Console.WriteLine("Macierz sąsiedztwa:");
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-                    Console.Write(graph.adjacencyMatrix[i][j] + " ");
-                }
-                Console.WriteLine();
-            }
+            graph.PrintAdjacencyMatrix();
         }
         static int GetOption()
         {
@@ -199,10 +191,53 @@ namespace TAiO
 
 
         }
+
+        static int GetDecisionForGraphs()
+        {
+            Console.WriteLine("Wybierz opcję, którą chcesz zrobić:");
+            Console.WriteLine("1. Wczytać domyślne dwa grafy.");
+            Console.WriteLine("2. Ustawić własne dwa grafy.");
+            return ReadUserOption(1, 2);
+        }
         static void Main()
         {
-            DirectedGraph g1 = new DirectedGraph(0);
-            DirectedGraph g2 = new DirectedGraph(0);
+            var default1 = new int[,]
+            {
+                { 0, 1, 1, 1, 1, 1},
+                { 1, 0, 1, 1, 0, 1},
+                { 1, 1, 0, 1, 1, 1},
+                { 1, 1, 1, 0, 1, 1},
+                { 1, 1, 1, 1, 0, 0},
+                { 1, 1, 1, 1, 1, 0},
+            };
+
+            var default2 = new int[,]
+            {
+                { 0, 0, 1, 0, 0},
+                { 0, 0, 1, 1, 1},
+                { 0, 0, 0, 1, 1},
+                { 0, 1, 0, 0, 1},
+                { 1, 1, 0, 1, 0},
+            };
+            DirectedGraph g1 = new DirectedGraph(default1);
+            DirectedGraph g2 = new DirectedGraph(default2);
+
+            switch (GetDecisionForGraphs())
+            {
+                case 1:
+                    g1.PrintAdjacencyMatrix();
+                    g2.PrintAdjacencyMatrix();
+                    break;
+
+                case 2:
+                    GetGraph(out g1);
+                    GetGraph(out g2);
+                    break;
+
+                default:
+                    break;
+            }
+
             while (true)
             {
                 switch (GetOption())
