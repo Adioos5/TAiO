@@ -183,8 +183,15 @@ namespace TAiO
         }
         private static void DisplayGraph(int[][] m)
         {
+            Console.Write("  ");
             for (int i = 0; i < m.GetLength(0); i++)
             {
+                Console.Write(i + " ");
+            }
+            Console.WriteLine();
+            for (int i = 0; i < m.GetLength(0); i++)
+            {
+                Console.Write(i + " ");
                 for (int j = 0; j < m.GetLength(0); j++)
                 {
                     Console.Write(m[i][j] + " ");

@@ -130,11 +130,15 @@ namespace TAiO
             switch (ReadUserOption(1, 2))
             {
                 case 1:
+                    Console.WriteLine();
+                    Console.WriteLine("[Macierz sasiedztwa maksymalnego wspolnego podgrafu obu grafow]:");
                     MaximalCommonSubgraph.FindPrecisely(graph1, graph2);
                     Console.WriteLine();
                     break;
 
                 case 2:
+                    Console.WriteLine();
+                    Console.WriteLine("[Macierz sasiedztwa aproksymacji maksymalnego wspolnego podgrafu obu grafow]:");
                     MaximalCommonSubgraph.Approximate(graph1, graph2);
                     Console.WriteLine();
                     break;
