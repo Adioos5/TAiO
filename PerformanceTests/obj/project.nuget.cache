@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "KU/LHyOGEskKo7h4ZhD9crhmSVIuKCe9xfYyBRMJ3ltmjKfx4aIJZZwhhPfHx7WRjDT2AoYjO0NoTUBKpLmarw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Anita\\TAiO\\PerformanceTests\\PerformanceTests.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Anita\\.nuget\\packages\\accord\\3.8.0\\accord.3.8.0.nupkg.sha512",
+    "C:\\Users\\Anita\\.nuget\\packages\\accord.math\\3.8.0\\accord.math.3.8.0.nupkg.sha512",
+    "C:\\Users\\Anita\\.nuget\\packages\\accord.statistics\\3.8.0\\accord.statistics.3.8.0.nupkg.sha512",
+    "C:\\Users\\Anita\\.nuget\\packages\\hungarianalgorithm\\2.2.10\\hungarianalgorithm.2.2.10.nupkg.sha512",
+    "C:\\Users\\Anita\\.nuget\\packages\\mathnet.numerics\\5.0.0\\mathnet.numerics.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
