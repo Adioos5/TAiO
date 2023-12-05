@@ -48,7 +48,7 @@ namespace PerformanceTests
                 }
                 timesApprAlg[i] = sum/3;
                 sw.Reset();
-                graph = graphGeneratorConstVert.GenerateNext();
+                graph = graphGeneratorConstVert.GenerateNext(1);
             }
             File.WriteAllLines(path + "\\CliqueAlgorithmTimes_1.txt", timesExactAlg.Select(tb => tb.ToString()));
             File.WriteAllLines(path + "\\CliqueApproximationTimes_1.txt", timesApprAlg.Select(tb => tb.ToString()));
@@ -83,7 +83,7 @@ namespace PerformanceTests
                 }
                 timesApprAlg[i] = sum / 3;
                 sw.Reset();
-                graph = graphGeneratorConstEdg.GenerateNext();
+                graph = graphGeneratorConstEdg.GenerateNext(1);
             }
             File.WriteAllLines(path + "\\CliqueAlgorithmTimes_2.txt", timesExactAlg.Select(tb => tb.ToString()));
             File.WriteAllLines(path + "\\CliqueApproximationTimes_2.txt", timesApprAlg.Select(tb => tb.ToString()));

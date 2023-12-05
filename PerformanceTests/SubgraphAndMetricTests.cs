@@ -46,7 +46,7 @@ namespace PerformanceTests
             var graphGeneratorConstVert = new GraphGeneratorConstVert(vertices, edges);
             var graphChanging = graphGeneratorConstVert.Generate();
 
-            for (int i = 0; i < graphsToCheck; i+=5)
+            for (int i = 0; i < graphsToCheck; i++)
             {
                 double sum = 0;
                 for (int j = 0; j < 3; j++)
@@ -89,7 +89,7 @@ namespace PerformanceTests
                 }
                 timesApprAlgM[i] = sum / 3;
                 sw.Reset();
-                graphChanging = graphGeneratorConstVert.GenerateNext();
+                graphChanging = graphGeneratorConstVert.GenerateNext(5);
             }
 
             File.WriteAllLines(path + "\\SubgraphExactAlgorithmTimes_1.txt", timesExactAlg.Select(tb => tb.ToString()));
@@ -108,7 +108,7 @@ namespace PerformanceTests
             var graphUnchanging = graphGeneratorConstVert.Generate();
             graphGeneratorConstVert.edges = edges;
             var graphChanging = graphGeneratorConstVert.Generate();
-            for (int i = 0; i < graphsToCheck; i+=5)
+            for (int i = 0; i < graphsToCheck; i++)
             {
                 double sum = 0;
                 for(int j=0; j<3; j++)
@@ -151,7 +151,7 @@ namespace PerformanceTests
                 }
                 timesApprAlgM[i] = sum/3;
                 sw.Reset();
-                graphChanging = graphGeneratorConstVert.GenerateNext();
+                graphChanging = graphGeneratorConstVert.GenerateNext(5);
             }
             File.WriteAllLines(path + "\\SubgraphExactAlgorithmTimes_2.txt", timesExactAlg.Select(tb => tb.ToString()));
             File.WriteAllLines(path + "\\MetricExactAlgorithmTimes_2.txt", timesExactAlgM.Select(tb => tb.ToString()));

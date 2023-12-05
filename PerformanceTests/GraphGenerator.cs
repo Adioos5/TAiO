@@ -42,9 +42,9 @@ namespace PerformanceTests
         {
         }
 
-        public DirectedGraph GenerateNext()
+        public DirectedGraph GenerateNext(int incr)
         {
-            edges++;
+            edges +=incr;
             return Generate();
         }
     }
@@ -55,26 +55,9 @@ namespace PerformanceTests
         {
         }
 
-        public DirectedGraph GenerateNext()
+        public DirectedGraph GenerateNext(int incr)
         {
-            vertices++;
-            return Generate();
-        }
-    }
-
-    public class GraphGeneratorConstDensity : GraphGenerator
-    {
-        double density { get; set; }
-        public GraphGeneratorConstDensity(int vert, int edg, double rate) : base(vert, edg)
-        {
-            density = rate;
-            var maxEdge = vert * (vert - 1);
-            edges = (int)(vert * density);
-        }
-        public DirectedGraph GenerateNext()
-        {
-            vertices++;
-            edges = (int)(vertices * (vertices - 1) * density);
+            vertices+=incr;
             return Generate();
         }
     }
