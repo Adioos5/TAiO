@@ -10,44 +10,14 @@ namespace TAiO
 
     class Program
     {
-        private DirectedGraph graph1 = new DirectedGraph(0);
-        public DirectedGraph Graph1
-        {
-            get
-            {
-                return graph1;
-            }
-            set
-            {
-                graph1 = value;
-            }
-        }
-        private DirectedGraph graph2 = new DirectedGraph(0);
-        public DirectedGraph Graph2
-        {
-            get
-            {
-                if (graph2 == null)
-                {
-                    graph2 = new DirectedGraph(0);
-                }
-                return graph2;
-            }
-            set
-            {
-                graph2 = value;
-            }
-        }
-
-
         static string GetPath()
         {
             string? path;
 
             while (true)
             {
-                Console.WriteLine("Podaj ścieżkę do pliku z grafem:");
-                Console.WriteLine("Bieżący katalog: " + Environment.CurrentDirectory);
+                Console.WriteLine("Podaj sciezke do pliku z grafem:");
+                Console.WriteLine("Biezacy katalog: " + Environment.CurrentDirectory);
                 path = Console.ReadLine();
 
                 if (!path.StartsWith('C'))
@@ -59,7 +29,7 @@ namespace TAiO
                 }
                 else
                 {
-                    Console.WriteLine("Plik nie istnieje. Spróbuj jeszcze raz.");
+                    Console.WriteLine("Plik nie istnieje. Sprobuj jeszcze raz.");
                 }
             }
         }
@@ -70,7 +40,7 @@ namespace TAiO
             {
                 sr.ReadLine();
                 size = int.Parse(sr.ReadLine());
-                Console.WriteLine("Liczba wierzchołków: " + size);
+                Console.WriteLine("Liczba wierzchołkow: " + size);
 
                 graph = new DirectedGraph(size);
                 for (int i = 0; i < size; i++)
@@ -88,16 +58,15 @@ namespace TAiO
         static int GetOption()
         {
             int option;
-            Console.WriteLine("Wybierz opcję, którą chcesz zrobić:");
-            Console.WriteLine("1. Ustawić pierwszy graf (klika, podgraf, metryka)");
-            Console.WriteLine("2. Ustawić drugi graf (podgraf, metryka)");
-            Console.WriteLine("3. Znaleźć metrykę między dwoma grafami");
-            Console.WriteLine("4. Znaleźć maksymalny wspólny podgraf dla dwóch grafów");
-            Console.WriteLine("5. Znaleźć największą klikę grafu");
-            Console.WriteLine("6. Wykonać testy");
-            Console.WriteLine("7. Wyczyścić konsolę");
+            Console.WriteLine("Wybierz opcje, ktora chcesz zrobic:");
+            Console.WriteLine("1. Ustawic pierwszy graf (klika, podgraf, metryka).");
+            Console.WriteLine("2. Ustawic drugi graf (podgraf, metryka).");
+            Console.WriteLine("3. Znalezc metrykę miedzy dwoma grafami.");
+            Console.WriteLine("4. Znalezc maksymalny wspolny podgraf dla dwoch grafow.");
+            Console.WriteLine("5. Znalezc najwieksza klike grafu.");
+            Console.WriteLine("6. Wyczyscic konsole.");
 
-            return ReadUserOption(1, 7);
+            return ReadUserOption(1, 6);
 
         }
         static int ReadUserOption(int min, int max)
@@ -113,7 +82,7 @@ namespace TAiO
                 }
                 else
                 {
-                    Console.WriteLine($"Błąd: Wprowadź liczbę od {min} do {max}.");
+                    Console.WriteLine($"Bład: Wprowadz liczbe od {min} do {max}.");
                 }
 
             } while (true);
@@ -121,22 +90,24 @@ namespace TAiO
         static private void GetOptionClique(DirectedGraph graph)
         {
             Console.WriteLine();
-            Console.WriteLine("Wybierz opcję, którą chcesz zrobić:");
-            Console.WriteLine("1. Znajdź największą klikę");
-            Console.WriteLine("2. Znajdź aproksymację największej kliki");
+            Console.WriteLine("Wybierz opcje, ktora chcesz zrobic:");
+            Console.WriteLine("1. Znajdz najwiekszą klike.");
+            Console.WriteLine("2. Znajdz aproksymacje najwiekszej kliki.");
             int[] clique;
             switch (ReadUserOption(1, 2))
             {
                 case 1:
                     clique = CliqueSolver.BiggestClique(graph);
-                    Console.WriteLine("Największa klika: " + (clique.Length == 0 ? "No clique found." : "[" + string.Join(", ", clique) + "]"));
+                    Console.WriteLine("Najwieksza klika: " + (clique.Length == 0 ? "Klika nieznaleziona." : "[" + string.Join(", ", clique) + "]"));
                     Console.WriteLine("Rozmiar kliki: " + clique.Length);
+                    Console.WriteLine();
                     break;
 
                 case 2:
                     clique = CliqueSolver.AproxClique(graph);
-                    Console.WriteLine("Aproksymacja największej kliki: " + (clique.Length == 0 ? "No clique found." : "[" + string.Join(", ", clique) + "]"));
+                    Console.WriteLine("Aproksymacja najwiekszej kliki: " + (clique.Length == 0 ? "Klika nieznaleziona." : "[" + string.Join(", ", clique) + "]"));
                     Console.WriteLine("Rozmiar kliki: " + clique.Length);
+                    Console.WriteLine();
                     break;
 
                 default:
@@ -149,18 +120,20 @@ namespace TAiO
         static private void GetOptionSubgraph(DirectedGraph graph1, DirectedGraph graph2)
         {
             Console.WriteLine();
-            Console.WriteLine("Wybierz opcję, którą chcesz zrobić:");
-            Console.WriteLine("1. Znajdź największy wspólny podgraf");
-            Console.WriteLine("2. Znajdź aproksymację największego wspólnego podgrafu");
+            Console.WriteLine("Wybierz opcje, ktora chcesz zrobic:");
+            Console.WriteLine("1. Znajdz najwiekszy wspolny podgraf.");
+            Console.WriteLine("2. Znajdz aproksymacje najwiekszego wspolnego podgrafu.");
             int[] clique;
             switch (ReadUserOption(1, 2))
             {
                 case 1:
                     MaximalCommonSubgraph.FindPrecisely(graph1, graph2);
+                    Console.WriteLine();
                     break;
 
                 case 2:
                     MaximalCommonSubgraph.Approximate(graph1, graph2);
+                    Console.WriteLine();
                     break;
 
                 default:
@@ -172,17 +145,19 @@ namespace TAiO
         static private void GetOptionMetric(DirectedGraph graph1, DirectedGraph graph2)
         {
             Console.WriteLine();
-            Console.WriteLine("Wybierz opcję, którą chcesz zrobić:");
-            Console.WriteLine("1. Znajdź wartość metryki");
-            Console.WriteLine("2. Znajdź aproksymację wartości metryki");
+            Console.WriteLine("Wybierz opcje, ktora chcesz zrobic:");
+            Console.WriteLine("1. Znajdz wartosc metryki.");
+            Console.WriteLine("2. Znajdz aproksymacje wartosci metryki.");
             switch (ReadUserOption(1, 2))
             {
                 case 1:
-                    Console.WriteLine($"Dokładna wartość metryki to: {Metric.CalculatePrecisely(graph1, graph2)}");
+                    Console.WriteLine($"Dokladna wartosc metryki to: {Metric.CalculatePrecisely(graph1, graph2)}");
+                    Console.WriteLine();
                     break;
 
                 case 2:
-                    Console.WriteLine($"Przybliżona wartość metryki to: {Metric.Approximate(graph1, graph2)}");
+                    Console.WriteLine($"Przyblizona wartosc metryki to: {Metric.Approximate(graph1, graph2)}");
+                    Console.WriteLine();
                     break;
 
                 default:
@@ -194,9 +169,9 @@ namespace TAiO
 
         static int GetDecisionForGraphs()
         {
-            Console.WriteLine("Wybierz opcję, którą chcesz zrobić:");
-            Console.WriteLine("1. Wczytać domyślne dwa grafy.");
-            Console.WriteLine("2. Ustawić własne dwa grafy.");
+            Console.WriteLine("Wybierz opcje, ktora chcesz zrobic:");
+            Console.WriteLine("1. Wczytac domyslne dwa grafy.");
+            Console.WriteLine("2. Ustawic własne dwa grafy.");
             return ReadUserOption(1, 2);
         }
         static void Main()
@@ -247,14 +222,14 @@ namespace TAiO
                         {
                             GetGraph(out g1);
                         }
-                        catch (Exception ex) { Console.WriteLine("Błąd:" + ex.Message); }
+                        catch (Exception ex) { Console.WriteLine("Error:" + ex.Message); }
                         break;
                     case 2:
                         try
                         {
                             GetGraph(out g2);
                         }
-                        catch (Exception ex) { Console.WriteLine("Błąd:" + ex.Message); }
+                        catch (Exception ex) { Console.WriteLine("Error:" + ex.Message); }
                         break;
                     case 3:
 
@@ -262,7 +237,7 @@ namespace TAiO
                         {
                             GetOptionMetric(g1, g2);
                         }
-                        catch (Exception ex) { Console.WriteLine("Błąd:" + ex.Message); }
+                        catch (Exception ex) { Console.WriteLine("Error:" + ex.Message); }
                         break;
 
                     case 4:
@@ -271,7 +246,7 @@ namespace TAiO
                         {
                             GetOptionSubgraph(g1, g2);
                         }
-                        catch (Exception ex) { Console.WriteLine("Błąd:" + ex.Message); }
+                        catch (Exception ex) { Console.WriteLine("Error:" + ex.Message); }
                         break;
 
                     case 5:
@@ -279,12 +254,9 @@ namespace TAiO
                         {
                             GetOptionClique(g1);
                         }
-                        catch (Exception ex) { Console.WriteLine("Błąd:" + ex.Message); }
+                        catch (Exception ex) { Console.WriteLine("Error:" + ex.Message); }
                         break;
                     case 6:
-                        //run tests
-                        break;
-                    case 7:
                         Console.Clear();
                         break;
 
