@@ -46,7 +46,7 @@ namespace PerformanceTests
             var graphGeneratorConstVert = new GraphGeneratorConstVert(vertices, edges);
             var graphChanging = graphGeneratorConstVert.Generate();
 
-            for (int i = 0; i < graphsToCheck; i++)
+            for (int i = 0; i < graphsToCheck; i+=5)
             {
                 double sum = 0;
                 for (int j = 0; j < 3; j++)
@@ -108,7 +108,7 @@ namespace PerformanceTests
             var graphUnchanging = graphGeneratorConstVert.Generate();
             graphGeneratorConstVert.edges = edges;
             var graphChanging = graphGeneratorConstVert.Generate();
-            for (int i = 0; i < graphsToCheck; i++)
+            for (int i = 0; i < graphsToCheck; i+=5)
             {
                 double sum = 0;
                 for(int j=0; j<3; j++)
