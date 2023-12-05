@@ -121,8 +121,8 @@ namespace TAiO
         {
             Console.WriteLine();
             Console.WriteLine("Wybierz opcje, ktora chcesz zrobic:");
-            Console.WriteLine("1. Znajdz najwiekszy wspolny podgraf.");
-            Console.WriteLine("2. Znajdz aproksymacje najwiekszego wspolnego podgrafu.");
+            Console.WriteLine("1. Znajdz maksymalny wspolny podgraf.");
+            Console.WriteLine("2. Znajdz aproksymacje maksymalnego wspolnego podgrafu.");
             int[] clique;
             switch (ReadUserOption(1, 2))
             {
